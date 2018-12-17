@@ -13,7 +13,9 @@ dependencies:
   path: ^1.0.0
   service_worker: ^0.2.0
   rxdart: ^0.18.0
-  flutter_mmkv: ^1.0.0
+  flutter_mmkv:
+    git:
+      url: https://github.com/iqbalmineraltown/flutter_mmkv
 
 dev_dependencies:
   mockito: ^3.0.0
