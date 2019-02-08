@@ -114,6 +114,22 @@ final myDataResource = HttpNetworkResource<MyData>(
 );
 ```
 
+or using resource with HTTP response handling
+
+```dart
+final myDataResource = CustomHttpNetworkResource<String>(
+  url: 'https://example.com/my-data.json',
+  parser: (contents) => MyData.fromJson(contents)s,
+  cache: MMKVResource('${uri.toString().replaceAll("/", "|")}', ''),
+  maxAge: Duration(minutes: 60),
+  strategy:
+      isCacheFirst ? CacheStrategy.cacheFirst : CacheStrategy.networkFirst,
+  responseHandler: (Response response){}, /// handlle raw response if needed
+);
+```
+
+### Handle Response Object when retrieving from network
+
 ### Flutter using Shared Preferences
 
 Import `SharedPrefsResource`.
