@@ -130,7 +130,9 @@ class StorageEntry<T> extends LocalResource<T> {
 
   @override
   Future<DateTime> get lastModified async =>
-      saveLastModified ? DateTime.tryParse(storage[modifiedKey]) : null;
+      (saveLastModified && storage[modifiedKey] != null)
+          ? DateTime.tryParse(storage[modifiedKey])
+          : null;
 
   @override
   Future<T> write(contents) async {
