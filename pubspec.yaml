@@ -3,7 +3,6 @@ description: Automatically cache network resources and use them when offline. In
 version: 0.1.4
 author: Jacob Phillips <jifalops@gmail.com>
 homepage: https://github.com/jifalops/async_resource
-
 environment:
   sdk: ">=2.0.0 <3.0.0"
 
@@ -12,7 +11,7 @@ dependencies:
   meta: ^1.0.0
   path: ^1.0.0
   service_worker: ^0.2.0
-  rxdart: ^0.18.0
+  rxdart: ^0.20.0
   flutter_mmkv:
     git:
       url: https://github.com/iqbalmineraltown/flutter_mmkv
