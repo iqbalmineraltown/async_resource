@@ -33,9 +33,7 @@ abstract class AsyncResource<T> {
   Future<dynamic> fetchContents();
 
   Future<dynamic> _tryFetchContents() async {
-    try {
-      return await fetchContents();
-    } catch (ignored) {}
+    return await fetchContents();
   }
 }
 
