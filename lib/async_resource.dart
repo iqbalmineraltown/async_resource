@@ -162,7 +162,20 @@ abstract class NetworkResource<T> extends AsyncResource<T> {
         strategy == CacheStrategy.networkFirst ||
         await isExpired) {
       print('${cache.basename}: Fetching from $url');
-      final contents = await _tryFetchContents();
+      dynamic contents;
+      try {
+        contents = await _tryFetchContents();
+      } catch (exception) {
+        if (allowCacheFallback) {
+          print('$url Using a cached copy fallback if available.');
+          var storedCache = await cache.get();
+          if (storedCache != null) {
+            return storedCache;
+          } else {
+            throw exception;
+          }
+        }
+      }
       if (contents != null) {
         print('$url Fetched.');
         if (!skipCacheWrite) {
