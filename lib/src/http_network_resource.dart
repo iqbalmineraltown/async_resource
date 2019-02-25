@@ -57,7 +57,7 @@ class CustomHttpNetworkResource<T> extends NetworkResource<T> {
       @required LocalResource<T> cache,
       Duration maxAge,
       CacheStrategy strategy,
-      Parser parser,
+      Parser<T> parser,
       this.client,
       this.headers,
       this.binary: false,
@@ -72,7 +72,7 @@ class CustomHttpNetworkResource<T> extends NetworkResource<T> {
 
   /// Optional. The [http.Client] to use, recommended if frequently hitting
   /// the same server. If not specified, [http.get()] will be used instead.
-  final http.Client client;
+  final Client client;
 
   /// Optional. The HTTP headers to send with the request.
   final Map<String, String> headers;
@@ -87,12 +87,10 @@ class CustomHttpNetworkResource<T> extends NetworkResource<T> {
   @override
   Future<dynamic> fetchContents() async {
     final response = await (client == null
-        ? http.get(url, headers: headers)
+        ? get(url, headers: headers)
         : client.get(url, headers: headers));
 
-    if (responseHandler != null) {
-      responseHandler(response);
-    }
+    responseHandler(response);
 
     return (response != null)
         ? (binary ? response.bodyBytes : response.body)
